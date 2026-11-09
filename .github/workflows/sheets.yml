@@ -1,0 +1,106 @@
+# Checks the Python code and the manual and builds all sheets (from the
+# committed sheets/<icao>.typ exactly as they are) with the release notes on
+# every push and pull request (attached to the run as the artifact "sheets").
+# A pushed tag, named after the AIRAC cycle (e.g. 2611, or 2611.1 for a
+# corrected re-release), also publishes them as a GitHub Release.
+
+name: Sheets
+
+on:
+  push:
+    branches: [main]
+    tags: ["*"]
+  pull_request:
+  workflow_dispatch:
+
+# A newer push to the same branch or pull request cancels the older run
+# (never for tags: a release must finish).
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+
+env:
+  # The version the sheets are tested with locally (`typst --version`);
+  # update together with a local `make check`.
+  TYPST_VERSION: "0.15.1"
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Ruff
+        run: make lint RUFF="pipx run ruff"
+
+      - name: Install Typst
+        run: |
+          curl -sSfL "https://github.com/typst/typst/releases/download/v${TYPST_VERSION}/typst-x86_64-unknown-linux-musl.tar.xz" \
+            | sudo tar -xJ --strip-components=1 -C /usr/local/bin typst-x86_64-unknown-linux-musl/typst
+          typst --version
+
+      - name: Install fonts
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q fonts-ibm-plex
+          # Fail instead of silently falling back to another font
+          typst fonts | grep -q "IBM Plex Sans"
+
+      # The committed sheets must match their settings, the data and the
+      # template; make would update them, so a change means it was not run
+      # before the commit
+      - name: Sheets in sync
+        run: |
+          make sheets
+          if [ -n "$(git status --porcelain -- sheets/)" ]; then
+            git status --short -- sheets/
+            git diff -- sheets/
+            echo "::error::sheets/ is not up to date: run make and commit sheets/"
+            exit 1
+          fi
+
+      # No inputs in the repository: make builds from the committed data/. The
+      # release notes link to the tag (make reads GITHUB_REF_TYPE/_NAME).
+      - name: Build the sheets and the release notes
+        run: make publish
+
+      # Not released, only checked
+      - name: Build the manual
+        run: make docs
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: sheets
+          path: build/publish/
+          if-no-files-found: error
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: sheets
+          path: release
+
+      # Files, their labels (assets.txt: file#label) and the text come from
+      # tools/release.py
+      - name: Create release
+        working-directory: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          mapfile -t assets < assets.txt
+          gh release create "$TAG" "${assets[@]}" \
+            --verify-tag \
+            --title "AIRAC $TAG" \
+            --notes-file notes.md

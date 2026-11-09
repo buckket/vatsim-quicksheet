@@ -1,0 +1,33 @@
+[project]
+name = "vatsim-quicksheet"
+version = "0.1.0"
+description = "Data extractor for the VATSIM airport quicksheets (see the Makefile)"
+license = "MIT"
+authors = [{ name = "buckket" }]
+requires-python = ">=3.12"
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/buckket/vatsim-quicksheet"
+
+[dependency-groups]
+dev = ["ruff"]
+
+[tool.ruff]
+line-length = 120
+cache-dir = "build/ruff-cache"
+src = ["tools"]
+
+[tool.ruff.lint]
+select = [
+    "E", "W",   # pycodestyle
+    "F",        # pyflakes
+    "I",        # import sorting
+    "B",        # bugbear
+    "UP",       # pyupgrade
+    "SIM",      # simplify
+    "C4",       # comprehensions
+    "RUF",      # ruff-specific
+]
+# the en dash is intended (level windows "FL100–FL110")
+allowed-confusables = ["–"]

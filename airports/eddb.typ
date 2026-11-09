@@ -54,8 +54,8 @@
       [SUKIP 3Q, KISUC 1Q: only with RFL ≥ FL120],
     ),
     departures: [Directs off the SID only above 5000 ft (jets), 3000 ft (props)],
-    holdings: [KETAP, OGBER: coordinate with MAR · NUKRO, ATGUP, KLF: with FLG · ATGUP and KLF usually one holding],
-    approaches: [ILS X: 15 NM behind it on both runways, no parallel operations],
+    holdings: [KETAP, OGBER: coordinate with MAR · NUKRO, ATGUP, KLF: with FLG],
+    approaches: [ILS X: 15 NM separation behind on both runways],
   ),
 
   columns: (

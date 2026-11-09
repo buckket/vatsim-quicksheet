@@ -35,7 +35,8 @@
       [OID], [EDDV1Y], [EDDV1G], [EDDV1F], [EDDV1S],
       [INIT CLB], [4000 ft], [4000 ft], [4000 ft], [4000 ft],
       [DEP FREQ], [119.490], [119.490], [119.490], [119.490],
-    )],
+    )
+      #note[Heavies and northbound departures: 09L/27R · RWY 09: VAXEV departures from 09L]],
     section[STARs][#sheet-table(
       columns: (auto, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
       header: ([STAR], [09L], [09R], [27L], [27R], [APP freq], [Level at], ),

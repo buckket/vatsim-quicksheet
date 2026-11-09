@@ -89,7 +89,7 @@
       [NUKRO], [329 \[R\]], [5000 ft], [FL130], [≤230 kt], [1 min], [DBAS],
       [OGBER], [116 \[L\]], [5000 ft], [FL130], [≤230 kt], [1 min], [DBAN],
     )
-      #note[KETAP, OGBER: coordinate with MAR · NUKRO, ATGUP, KLF: with FLG · ATGUP and KLF usually one holding]],
+      #note[KETAP, OGBER: coordinate with MAR · NUKRO, ATGUP, KLF: with FLG]],
     section[Approach procedures][#sheet-table(
       columns: (auto, 1fr, 1fr, 1fr, 1fr),
       header: ([RWY], [06L], [06R], [24L], [24R], ),
@@ -102,6 +102,6 @@
       [ALT], [4000 ft], [3000 ft], [3000 ft], [4000 ft],
       [OTHER], [#small[ILS X, ILS Y, LOC, RNP Y, RNP Z]], [#small[ILS X, ILS Y, LOC, RNP Y, RNP Z]], [#small[ILS X, ILS Y, LOC, RNP Y, RNP Z]], [#small[ILS X, LOC, RNP Z]],
     )
-      #note[ILS X: 15 NM behind it on both runways, no parallel operations]],
+      #note[ILS X: 15 NM separation behind on both runways]],
   ),
 )

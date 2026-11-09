@@ -34,7 +34,9 @@
       [#swatch(colors.at("OKWEL")) OKWEL], [*2M*], [*2L*],
       [INIT CLB], [4000 ft], [4000 ft],
       [DEP FREQ], [124.800], [124.800],
-    )],
+    )
+      #note[TRA Weser (ED-R 202A/B/E) active: no ABDIM SIDs, route OKWEL N125 ITMIZ]
+      #note[RWY 26: props and turboprops \> 2000 kg depart from E instead of F (noise), unless performance requires F]],
     (
       section[STARs][#sheet-table(
         columns: (auto, 1fr, 1fr, 1fr, 1fr),

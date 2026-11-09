@@ -50,8 +50,8 @@
   sops: (),
 
   // Lines under a section's table or diagram, by section name (as in
-  // `columns`); written by hand. Example: (sids: [Release required ...])
-  notes: (:),
+  // `columns`); written by hand. Runway assignment from the vACC SOPs
+  notes: (sids: [Heavies and northbound departures: 09L/27R · RWY 09: VAXEV departures from 09L]),
 
   columns: (
     // Left column (SIDs) twice as wide as the right one

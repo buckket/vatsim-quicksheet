@@ -45,8 +45,13 @@
   sops: (),
 
   // Lines under a section's table or diagram, by section name (as in
-  // `columns`); written by hand. Example: (sids: [Release required ...])
-  notes: (:),
+  // `columns`); written by hand. Rules from the vACC SOPs
+  notes: (
+    sids: (
+      [TRA Weser (ED-R 202A/B/E) active: no ABDIM SIDs, route OKWEL N125 ITMIZ],
+      [RWY 26: props and turboprops > 2000 kg depart from E instead of F (noise), unless performance requires F],
+    ),
+  ),
 
   columns: (
     // Left column (SIDs) twice as wide as the right one

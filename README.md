@@ -2,7 +2,7 @@
 
 One-page A4 quicksheets for controlling the airports of the Bremen FIR (EDWW)
 on [VATSIM](https://vatsim.net): SIDs, STARs, approaches, holdings,
-frequencies and a control zone map. Currently EDDB, EDDV and EDDW.
+frequencies and a control zone map. Currently EDDB, EDDH, EDDV and EDDW.
 
 > [!IMPORTANT]
 > For flight simulation use only. Unofficial; not affiliated with VATSIM,
